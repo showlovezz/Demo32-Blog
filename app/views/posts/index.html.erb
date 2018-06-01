@@ -10,7 +10,6 @@
                 <small><%= time_ago_in_words(post.created_at) %> ago -</small>
               </div>
               <p class="mb-1"><%= truncate(post.body, length: 300) %></p>
-              <small>Donec id elit non mi porta.</small>
             <% end %>
           </div>
         <% end %>

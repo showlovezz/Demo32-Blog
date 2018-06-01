@@ -8,13 +8,14 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><%= simple_format @post.body %></li>
-            <li class="list-group-item">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <%= link_to "Edit", edit_post_path(@post), class: "btn btn-secondary" %>
-                <%= link_to "Delete", post_path(@post), class: "btn btn-secondary", method: :delete, data: {confirm: "Are you sure?"} %>
-              </div>
-            </li>
-            <!-- show -->
+            <% if user_signed_in? %>
+              <li class="list-group-item">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <%= link_to "Edit", edit_post_path(@post), class: "btn btn-secondary" %>
+                  <%= link_to "Delete", post_path(@post), class: "btn btn-secondary", method: :delete, data: {confirm: "Are you sure?"} %>
+                </div>
+              </li>
+            <% end %>
             <% @post.comments.each do |comment| %>
               <li class="list-group-item">
                 <div>
@@ -22,12 +23,13 @@
                   <p><%= simple_format comment.body %></p>
                   <p class="text-muted">
                     <em><%= time_ago_in_words(comment.created_at) %> ago -</em>
-                    <%= link_to "Delete", post_comment_path(@post, comment), class: "btn btn-danger btn-sm" , method: :delete %>
+                    <% if user_signed_in? %>
+                      <%= link_to "Delete", post_comment_path(@post, comment), class: "btn btn-danger btn-sm" , method: :delete %>
+                    <% end %>
                   </p>
                 </div>
               </li>
             <% end %>
-            <!-- show -->
           </ul>
           <div class="card-body">
            <%= form_for [@post, @comment] do |f| %>
