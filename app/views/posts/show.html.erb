@@ -1,7 +1,51 @@
-<h1>This is Show Page.</h1>
-
-<h1><%= @post.title %></h1>
-
-<%= @post.body %>
-
-<%= link_to "Back to index", posts_path %>
+<section id="section_post_show">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <div class="card">
+          <div class="card-body bg-info">
+            <h2 class="card-title"><%= @post.title %></h2>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= @post.body %></li>
+            <li class="list-group-item">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <%= link_to "Edit", edit_post_path(@post), class: "btn btn-secondary" %>
+                <%= link_to "Delete", post_path(@post), class: "btn btn-secondary", method: :delete, data: {confirm: "Are you sure?"} %>
+              </div>
+            </li>
+            <!-- show -->
+            <% @post.comments.each do |comment| %>
+              <li class="list-group-item">
+                <div>
+                  <h4><%= comment.name %></h4>
+                  <p><%= simple_format comment.body %></p>
+                  <p class="text-muted">
+                    <em><%= time_ago_in_words(comment.created_at) %> ago -</em>
+                    <%= link_to "Delete", post_comment_path(@post, comment), class: "btn btn-danger btn-sm" , method: :delete %>
+                  </p>
+                </div>
+              </li>
+            <% end %>
+            <!-- show -->
+          </ul>
+          <div class="card-body">
+           <%= form_for [@post, @comment] do |f| %>
+              <div class="form-group">
+                <%= f.label :name, "Name" %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :body, "Body" %>
+                <%= f.text_area :body, class: "form-control", rows: "3" %>
+              </div>
+              <div class="form-group mb-0">
+                <%= f.submit class: "class: btn btn-success btn-block" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

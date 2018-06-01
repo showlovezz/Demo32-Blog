@@ -1,19 +1,40 @@
-<%= form_for @post do |f| %>
+<section id="section_post_show">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
 
-  <% if @post.errors.any? %>
-    <h2>We have some errors here !</h2>
-    <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  <% end %>
+        <%= form_for @post do |f| %>
+          <% if @post.errors.any? %>
+            <h2>We have some errors here !</h2>
+            <ul>
+              <% @post.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          <% end %>
+          <div class="card">
+            <div class="card-body bg-info">
+              <h2 class="card-title">Edit Post</h2>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="form-group">
+                  <%= f.label :title, "Title" %>
+                  <%= f.text_field :title, class: "form-control form-control-lg" %>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <%= f.label :body, "Body" %>
+                <%= f.text_area :body, class: "form-control form-control-lg", rows: "10" %>
+              </li>
+               <li class="list-group-item">
+                <%= f.submit class: "class: btn btn-success btn-block" %>
+              </li>
+            </ul>
+          </div>
+        <%end %>
 
-  <%= f.label :title, "Title" %>
-  <%= f.text_field :title %>
-
-  <%= f.label :body, "Body" %>
-  <%= f.text_area :body %>
-
-  <%= f.submit %>
-<% end %>
+      </div>
+    </div>
+  </div>
+</section>

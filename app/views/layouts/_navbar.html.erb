@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5">
   <div class="container">
     <a class="navbar-brand" href="/">Blog</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,7 @@
           <a class="nav-link" href="/">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">New Post</a>
+          <%= link_to "Create Post", new_post_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Log Out</a>
